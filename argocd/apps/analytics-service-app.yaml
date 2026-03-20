@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: analytics-service
+  namespace: argocd
+spec:
+  project: toggle-master
+  source:
+    repoURL: https://github.com/wilckg/toggle-master-gitops.git
+    targetRevision: main
+    path: apps/analytics-service
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: toggle-master
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

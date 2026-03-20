@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: evaluation-service
+  namespace: toggle-master
+  labels:
+    app: evaluation-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: evaluation-service
+  template:
+    metadata:
+      labels:
+        app: evaluation-service
+    spec:
+      containers:
+        - name: evaluation-service
+          image: 123456789012.dkr.ecr.us-east-1.amazonaws.com/evaluation-service:initial
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8004
+          env:
+            - name: PORT
+              value: "8004"
+            - name: REDIS_HOST
+              value: "SEU_REDIS_ENDPOINT"
+            - name: REDIS_PORT
+              value: "6379"
+            - name: SQS_QUEUE_URL
+              value: "SUA_SQS_URL"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "300m"
+              memory: "256Mi"

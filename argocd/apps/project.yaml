@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: toggle-master
+  namespace: argocd
+spec:
+  description: Projeto GitOps do Toggle Master
+  sourceRepos:
+    - 'https://github.com/wilckg/toggle-master-gitops.git'
+  destinations:
+    - namespace: toggle-master
+      server: https://kubernetes.default.svc
+    - namespace: argocd
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'

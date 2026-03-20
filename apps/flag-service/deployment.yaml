@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flag-service
+  namespace: toggle-master
+  labels:
+    app: flag-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flag-service
+  template:
+    metadata:
+      labels:
+        app: flag-service
+    spec:
+      containers:
+        - name: flag-service
+          image: 123456789012.dkr.ecr.us-east-1.amazonaws.com/flag-service:initial
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8002
+          env:
+            - name: PORT
+              value: "8002"
+            - name: DB_HOST
+              value: "SEU_RDS_FLAG_ENDPOINT"
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: "flagdb"
+            - name: DB_USER
+              value: "postgres"
+            - name: DB_PASSWORD
+              value: "SUA_SENHA_AQUI"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "300m"
+              memory: "256Mi"

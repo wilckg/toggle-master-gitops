@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: analytics-service
+  namespace: toggle-master
+  labels:
+    app: analytics-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: analytics-service
+  template:
+    metadata:
+      labels:
+        app: analytics-service
+    spec:
+      containers:
+        - name: analytics-service
+          image: 123456789012.dkr.ecr.us-east-1.amazonaws.com/analytics-service:initial
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8005
+          env:
+            - name: PORT
+              value: "8005"
+            - name: AWS_REGION
+              value: "us-east-1"
+            - name: DYNAMODB_TABLE
+              value: "ToggleMasterAnalytics"
+            - name: SQS_QUEUE_URL
+              value: "SUA_SQS_URL"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "300m"
+              memory: "256Mi"

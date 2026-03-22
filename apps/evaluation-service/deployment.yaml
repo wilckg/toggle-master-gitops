@@ -25,11 +25,11 @@ spec:
             - name: PORT
               value: "8004"
             - name: REDIS_HOST
-              value: "SEU_REDIS_ENDPOINT"
+              value: "https://togglemaster-cache.dttbjt.0001.use1.cache.amazonaws.com"
             - name: REDIS_PORT
               value: "6379"
             - name: SQS_QUEUE_URL
-              value: "SUA_SQS_URL"
+              value: "https://sqs.us-east-1.amazonaws.com/539412416767/togglemaster-queue"
           resources:
             requests:
               cpu: "100m"

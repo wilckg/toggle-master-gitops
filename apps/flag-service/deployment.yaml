@@ -25,15 +25,21 @@ spec:
             - name: PORT
               value: "8002"
             - name: DB_HOST
-              value: "SEU_RDS_FLAG_ENDPOINT"
+              value: "togglemaster-flag-db.c3quisgw2evv.us-east-1.rds.amazonaws.com"
             - name: DB_PORT
               value: "5432"
             - name: DB_NAME
               value: "flagdb"
             - name: DB_USER
-              value: "postgres"
+              valueFrom:
+                secretKeyRef:
+                  name: flag-service-secret
+                  key: DB_USER
             - name: DB_PASSWORD
-              value: "SUA_SENHA_AQUI"
+              valueFrom:
+                secretKeyRef:
+                  name: flag-service-secret
+                  key: DB_PASSWORD
           resources:
             requests:
               cpu: "100m"

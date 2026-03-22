@@ -29,7 +29,7 @@ spec:
             - name: DYNAMODB_TABLE
               value: "ToggleMasterAnalytics"
             - name: SQS_QUEUE_URL
-              value: "SUA_SQS_URL"
+              value: "https://sqs.us-east-1.amazonaws.com/539412416767/togglemaster-queue"
           resources:
             requests:
               cpu: "100m"

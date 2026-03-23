@@ -24,7 +24,7 @@ spec:
           env:
             - name: PORT
               value: "8002"
-            - name: DB_HOST
+            - name: DATABASE_URL
               value: "togglemaster-flag-db.c3quisgw2evv.us-east-1.rds.amazonaws.com"
             - name: DB_PORT
               value: "5432"

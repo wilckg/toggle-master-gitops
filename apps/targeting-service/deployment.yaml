@@ -25,7 +25,7 @@ spec:
             - name: PORT
               value: "8003"
             - name: DATABASE_URL
-              value: "togglemaster-targeting-db.c3quisgw2evv.us-east-1.rds.amazonaws.com"
+              value: "postgres://$(DB_USER):$(DB_PASSWORD)@togglemaster-targeting-db.c3quisgw2evv.us-east-1.rds.amazonaws.com:5432/authdb?sslmode=disable"
             - name: DB_PORT
               value: "5432"
             - name: DB_NAME
@@ -40,6 +40,8 @@ spec:
                 secretKeyRef:
                   name: targeting-service-secret
                   key: DB_PASSWORD
+            - name: AUTH_SERVICE_URL
+              value: "http://auth-service:8001"
           resources:
             requests:
               cpu: "100m"

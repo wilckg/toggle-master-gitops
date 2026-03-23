@@ -24,8 +24,10 @@ spec:
           env:
             - name: PORT
               value: "8001"
+            - name: MASTER_KEY
+              value: "admin-secreto-123"
             - name: DATABASE_URL
-              value: "togglemaster-auth-db.c3quisgw2evv.us-east-1.rds.amazonaws.com"
+              value: "postgres://$(DB_USER):$(DB_PASSWORD)@togglemaster-auth-db.c3quisgw2evv.us-east-1.rds.amazonaws.com:5432/authdb?sslmode=disable"
             - name: DB_PORT
               value: "5432"
             - name: DB_NAME

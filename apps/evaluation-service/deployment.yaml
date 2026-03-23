@@ -30,6 +30,8 @@ spec:
               value: "6379"
             - name: AWS_SQS_URL
               value: "https://sqs.us-east-1.amazonaws.com/539412416767/togglemaster-queue"
+            - name: AWS_REGION
+              value: "us-east-1"
             - name: FLAG_SERVICE_URL
               value: "http://flag-service:8002"
             - name: TARGETING_SERVICE_URL

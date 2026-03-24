@@ -24,7 +24,7 @@ spec:
           env:
             - name: PORT
               value: "8004"
-            - name: REDIS_URL
+            - name: REDIS_HOST
               value: "togglemaster-cache.dttbjt.0001.use1.cache.amazonaws.com"
             - name: REDIS_PORT
               value: "6379"
@@ -36,6 +36,8 @@ spec:
               value: "http://flag-service:8002"
             - name: TARGETING_SERVICE_URL
               value: "http://targeting-service:8003"
+            - name: REDIS_URL
+              value: "redis://$(REDIS_HOST):$(REDIS_PORT)"
           resources:
             requests:
               cpu: "100m"

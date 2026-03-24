@@ -24,8 +24,8 @@ spec:
           env:
             - name: PORT
               value: "8003"
-            - name: DATABASE_URL
-              value: "postgres://$(DB_USER):$(DB_PASSWORD)@togglemaster-targeting-db.c3quisgw2evv.us-east-1.rds.amazonaws.com:5432/authdb?sslmode=disable"
+            - name: DB_HOST
+              value: "togglemaster-targeting-db.c3quisgw2evv.us-east-1.rds.amazonaws.com"
             - name: DB_PORT
               value: "5432"
             - name: DB_NAME
@@ -42,6 +42,8 @@ spec:
                   key: DB_PASSWORD
             - name: AUTH_SERVICE_URL
               value: "http://auth-service:8001"
+            - name: DATABASE_URL
+              value: "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable"
           resources:
             requests:
               cpu: "100m"

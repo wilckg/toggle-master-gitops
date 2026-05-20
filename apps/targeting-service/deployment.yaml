@@ -17,7 +17,11 @@ spec:
     spec:
       containers:
         - name: targeting-service
+<<<<<<< HEAD
           image: 539412416767.dkr.ecr.us-east-1.amazonaws.com/targeting-service:bec06a803e3b9feb48148acbc5f2e121a0a1ab0a
+=======
+          image: 539412416767.dkr.ecr.us-east-1.amazonaws.com/targeting-service:bec06a803e3b9feb48148acbc5f2e121a0a1ab0a
+>>>>>>> 4013932 (Ajuste de deployment)
           imagePullPolicy: Always
           ports:
             - containerPort: 8003
@@ -44,6 +48,12 @@ spec:
               value: "http://auth-service:8001"
             - name: DATABASE_URL
               value: "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable"
+            - name: OTEL_SERVICE_NAME
+              value: targeting-service
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://otel-collector.observability.svc.cluster.local:4317
+            - name: OTEL_EXPORTER_OTLP_PROTOCOL
+              value: grpc
           resources:
             requests:
               cpu: "100m"

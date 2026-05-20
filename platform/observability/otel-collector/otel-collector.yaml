@@ -17,28 +17,33 @@ data:
       batch:
 
     exporters:
-      logging:
+      debug:
         verbosity: detailed
 
       prometheus:
         endpoint: "0.0.0.0:8889"
 
-      otlp/newrelic:
-        endpoint: otlp.nr-data.net:4317
+      otlp_http/newrelic:
+        endpoint: https://otlp.nr-data.net
         headers:
-          api-key: ${NEW_RELIC_LICENSE_KEY}
+          api-key: ${env:NEW_RELIC_LICENSE_KEY}
 
     service:
       pipelines:
         traces:
           receivers: [otlp]
           processors: [batch]
-          exporters: [logging, otlp/newrelic]
+          exporters: [debug, otlp_http/newrelic]
 
         metrics:
           receivers: [otlp]
           processors: [batch]
-          exporters: [logging, prometheus, otlp/newrelic]
+          exporters: [debug, prometheus, otlp_http/newrelic]
+
+        logs:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [debug, otlp_http/newrelic]
 
 ---
 apiVersion: apps/v1
@@ -68,9 +73,12 @@ spec:
                   name: newrelic-secret
                   key: license-key
           ports:
-            - containerPort: 4317
-            - containerPort: 4318
-            - containerPort: 8889
+            - name: otlp-grpc
+              containerPort: 4317
+            - name: otlp-http
+              containerPort: 4318
+            - name: metrics
+              containerPort: 8889
           volumeMounts:
             - name: otel-config
               mountPath: /etc/otel

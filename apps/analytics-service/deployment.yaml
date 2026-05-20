@@ -26,6 +26,16 @@ spec:
               value: "8005"
             - name: AWS_REGION
               value: "us-east-1"
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: awssm-secret
+                  key: access-key
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: awssm-secret
+                  key: secret-access-key
             - name: AWS_DYNAMODB_TABLE
               value: "ToggleMasterAnalytics"
             - name: AWS_SQS_URL

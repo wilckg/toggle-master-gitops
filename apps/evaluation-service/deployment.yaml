@@ -38,6 +38,12 @@ spec:
               value: "http://targeting-service:8003"
             - name: REDIS_URL
               value: "redis://$(REDIS_HOST):$(REDIS_PORT)"
+            - name: OTEL_SERVICE_NAME
+              value: evaluation-service
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://otel-collector.observability.svc.cluster.local:4317
+            - name: OTEL_EXPORTER_OTLP_PROTOCOL
+              value: grpc
           resources:
             requests:
               cpu: "100m"
